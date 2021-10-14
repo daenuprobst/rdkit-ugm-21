@@ -10,6 +10,32 @@ paginate: true
 
 #### RDKit-Powered Reaction Classification and Yield Prediction using the Differential Reaction Fingerprint DRFP
 
+
+
+Disclaimer:
+- This work is part of my PhD project (Reymond Group, University of Bern)
+- Current Position: Research scientist @ IBM Research
+
+
+---
+
+#### Spoilers
+
+![w:1140px](img/classification.png)
+
+---
+
+#### Spoilers
+
+![w:900px](img/regression0.png)
+
+---
+
+#### Spoilers
+
+![w:650px](img/regression1.png)
+![w:900px](img/regression2.png)
+
 ---
 
 #### Reaction SMILES
@@ -27,7 +53,7 @@ SVG(d2d.GetDrawingText())
 
 ---
 
-#### Reaction SMILES - Everything is a Reactant<sup>1,2</sup>
+#### Reaction SMILES - Everything is a Reactant¹ ²
 
 ```python
 rxn_smiles = "CC(=O)O.OCC.[H+].[Cl-].OCC>>CC(=O)OCC"
@@ -39,8 +65,8 @@ SVG(d2d.GetDrawingText())
 ```
 
 ![w:900px](img/rxn1.png)
-<sup>1</sup> except the product(s), of course
-<sup>2</sup> and we don't need atom mappings either
+¹ except the product(s), of course
+² and we don't need atom mappings either
 
 ---
 
@@ -162,17 +188,83 @@ print(f"There are {sum(n_grams_per_bin)} unique molecular n-grams.")
 plt.hist(n_grams_per_bin)
 ```
 
-![w:500px](img/hist0.png)
+![w:350px](img/hist.png)
 
 ---
 
 #### Example
 
 ```python
-for d in [256, 512, 1024, 2048]:
+for i, d in enumerate([256, 512, 1024, 2048]):
     fps, mapping = DrfpEncoder.encode(smiles, mapping=True, n_folded_length=d)
-    n_grams_per_bin = [len(value) for value in mapping.values()]
-    plt.hist(n_grams_per_bin)
-    plt.title(f"Bin occupation for d={d}")
-    plt.show()
 ```
+
+![w:1140px](img/hists.png)
+
+---
+
+#### I Should have used TMAP...
+
+```python
+pca = PCA(n_components=2)
+X = pca.fit(fps).transform(fps)
+...
+```
+
+![w:325px](img/scatter.png)
+
+---
+
+### Really should have...
+
+![w:500px](img/tmap.png)
+
+---
+
+#### Encore
+```python
+X, y = pickle.load(open("buchwald_hartwig.pkl", "rb"))
+mapping = pickle.load(open("buchwald_hartwig.map.pkl", "rb"))
+model = pickle.load(open("buchwald_hartwig_model.pkl", "rb")) # XGBRegressor
+```
+...
+```python
+explainer = shap.TreeExplainer(model)
+shap_values = explainer.shap_values(X[:100])
+shap.summary_plot(shap_values, X[:100])
+```
+
+---
+
+#### Encore
+
+```python
+shap.force_plot(explainer.expected_value, shap_values[0,:], matplotlib=True)
+```
+
+![w:1140px](img/shap1.png)
+
+---
+
+#### Encore
+```python
+sub = list(mapping.get(760))[0].replace("c", "C")
+MolFromSmiles(sub)
+```
+
+![w:200px](img/cl.png)
+
+---
+
+#### Thanks!
+
+Thanks for listening!
+
+Connect with me...
+... on the blue bird network: @skepteis
+... e-mail: dpr@zurich.ibm.com
+
+
+Im currently working on...
+... retrosynthetic pathway prediction for biocatalysed reactions 
+(https://rxn.res.ibm.com/, preprint: https://bit.ly/BIOCATML)
