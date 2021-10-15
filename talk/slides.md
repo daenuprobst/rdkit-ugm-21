@@ -14,6 +14,7 @@ paginate: true
 
 Disclaimer:
 - This work is part of my PhD project (Reymond Group, University of Bern)
+- Co-authors: Philippe Schwaller, Jean-Louis Reymond
 - Current Position: Research scientist @ IBM Research
 
 
@@ -22,6 +23,8 @@ Disclaimer:
 #### Spoilers
 
 ![w:1140px](img/classification.png)
+<span style="font-size:0.5em">Schwaller, P.; Probst, D.; Vaucher, A. C.; Nair, V. H.; Kreutter, D.; Laino, T.; Reymond, J.-L., Nat Mach Intell 2021</span>
+<span style="font-size:0.5em;">Schneider, N.; Lowe, D. M.; Sayle, R. A.; Landrum, G. A., J. Chem. Inf. Model. 2015</span>
 
 ---
 
@@ -35,6 +38,8 @@ Disclaimer:
 
 ![w:650px](img/regression1.png)
 ![w:900px](img/regression2.png)
+<span style="font-size:0.5em">Schwaller, P.; Vaucher, A. C.; Laino, T.; Reymond, J.-L., Machine Learning: Science and Technology 2021, 2, 015016</span>
+<span style="font-size:0.5em">Ahneman, D. T.; Estrada, J. G.; Lin, S.; Dreher, S. D.; Doyle, A. G., Science 2018</span>
 
 ---
 
@@ -53,7 +58,7 @@ SVG(d2d.GetDrawingText())
 
 ---
 
-#### Reaction SMILES - Everything is a Reactant¹ ²
+#### Reaction SMILES - Everything is a Reactant<sup>1,2</sup>
 
 ```python
 rxn_smiles = "CC(=O)O.OCC.[H+].[Cl-].OCC>>CC(=O)OCC"
@@ -65,8 +70,8 @@ SVG(d2d.GetDrawingText())
 ```
 
 ![w:900px](img/rxn1.png)
-¹ except the product(s), of course
-² and we don't need atom mappings either
+<sup>1</sup>except the product(s), of course
+<sup>2</sup>and we don't need atom mappings either
 
 ---
 
